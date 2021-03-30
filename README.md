@@ -1,3 +1,6 @@
+## Project is continously deployed here:
+Link: https://fetch-git-users.netlify.app
+
 ## Starter Project
 
 - css provided (global styles, styled components)
