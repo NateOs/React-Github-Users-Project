@@ -5,10 +5,10 @@ import loadingImage from '../images/preloader.gif';
 import {useGlobalContext} from '../context/context';
 
 const Dashboard = () => {
-  const data = useGlobalContext()
+  const { followers, githubUser, repos} = useGlobalContext()
+  
   return (
     <main>
-      <p>{data}</p>
       <Navbar></Navbar>
       <Search />
       <Info />
