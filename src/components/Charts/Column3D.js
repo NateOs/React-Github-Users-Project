@@ -1,7 +1,32 @@
 import React from 'react';
+import FusionCharts from 'fusioncharts';
+import Charts from 'fusioncharts/fusioncharts.charts';
+import ReactFC from 'react-fusioncharts';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.candy';
 
-const Column3D = () => {
-  return <div>chart</div>;
-};
+ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
 
-export default Column3D;
+const ChartComponent = ({data}) => {
+  const chartConfigs = {
+    type: 'column3d',
+    width: '550',
+    height: '400',
+    dataFormat: 'json',
+    dataSource: {
+      //* Config
+      "chart": {
+        "caption": "Most popular language",
+        'yAxisName': 'Stars',
+        'xAxisName':'Repos',
+        'xAxisNameFontSize': '16px',
+        'yAxisNameFontSize': '16px',
+        showPercentValues: 0
+      },
+      //* Data
+      data
+    },
+  };
+  return <ReactFC {...chartConfigs} />; 
+}
+
+export default ChartComponent
