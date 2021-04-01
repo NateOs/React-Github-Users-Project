@@ -18,7 +18,6 @@ const ChartComponent = ({data}) => {
         "theme": "fusion",
         "decimals":0,
         "pieRadius" : "50%",
-        "paletteColors": "#FF0000, #0372AB, #FF5904"
       },
       data
     },
