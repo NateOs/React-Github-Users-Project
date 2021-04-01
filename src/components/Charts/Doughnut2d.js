@@ -9,7 +9,7 @@ ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
 const ChartComponent = ({data}) => {
   const chartConfigs = {
     type: 'doughnut2d',
-    width: '100%',
+    width: '550',
     height: '400',
     dataFormat: 'json',
     dataSource: {
