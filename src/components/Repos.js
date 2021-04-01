@@ -22,28 +22,29 @@ const Repos = () => {
   //* converting to array and sorting array, slice cuts off the array
   languages = Object.values(languages).sort((a, b) => (b.value - a.value)).slice(0, 5) 
 
-  console.log(languages)
-
-  // const chartData = [
-  //   {
-  //     "label": "HTML",
-  //     "value": "13"
-  //   },
-  //   {
-  //     "label": "CSS",
-  //     "value": "23"
-  //   },
-  //   {
-  //     "label": "JS",
-  //     "value": "80"
-  //   },
+  const chartData = [
+    {
+      "label": "HTML",
+      "value": "13"
+    },
+    {
+      "label": "CSS",
+      "value": "23"
+    },
+    {
+      "label": "JS",
+      "value": "80"
+    },
     
-  // ]
+  ]
 
   return (
     <section>
       <Wrapper>
         <Pie3D data={languages}/>
+        <div></div>
+        <Doughnut2D data={languages}/>
+        <div></div>
       </Wrapper>     
     </section>)
 };
