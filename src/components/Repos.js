@@ -26,7 +26,8 @@ const Repos = () => {
   return (
     <section>
       <Wrapper>
-        <ExampleChart data={chartData}/>
+        {/* <ExampleChart data={chartData}/> */}
+        <Pie3D data={chartData}/>
       </Wrapper>     
     </section>)
 };
