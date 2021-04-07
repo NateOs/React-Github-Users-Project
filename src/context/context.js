@@ -23,14 +23,28 @@ const GithubProvider = ({children}) => {
         setLoading(true)
         const response = await axios(`${rootUrl}/users/${user}`)
         .catch((err) => console.log(err))
+
         if (response) {
             setgithubUser(response.data)
+
+            //* creating new query
+            const {login, followers_url} = response.data
+
+            //*for repos
+            axios(`${rootUrl}/users/${login}/repos?per_page=100`)
+            .then(response => setRepos(response.data))
+            
+            //* for followers
+            axios(`https://api.github.com/users/${login}/followers`)
+            .then(response => setFollowers(response.data))
         } else {
             toggleError(true, 'there is no user with that username')
         }
         checkRequests()
         setLoading(false)
     }
+    // https://api.github.com/users/john-smilga/repos?per_page=100
+    // https://api.github.com/users/john-smilga/followers
 
     //* check request rate of 60
     const checkRequests = () => {
