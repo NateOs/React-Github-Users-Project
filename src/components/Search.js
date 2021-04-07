@@ -6,8 +6,8 @@ import { useGlobalContext } from '../context/context';
 
 const Search = () => {
   const [user, setUser] = useState('')
-  const { requests } = useGlobalContext()
-
+  const { requests, error } = useGlobalContext()
+console.log(error);
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(user)
@@ -18,6 +18,7 @@ const Search = () => {
   return (
     <section>
       <Wrapper className="section">
+        {error.show && <ErrorWrapper><p>{error.msg}</p></ErrorWrapper>}
         <form onSubmit={handleSubmit}>
           <div className='form-control'>
             <MdSearch></MdSearch>

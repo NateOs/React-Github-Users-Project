@@ -16,7 +16,7 @@ const GithubProvider = ({children}) => {
     //* request loading
     const [requests, setRequests] = useState(0)
     const [loading, setLoading] = useState(false)
-    
+    const [error, setError] = useState({show:false, msg:''})
 
     //* check rate
     const checkRequests = () => {
@@ -26,6 +26,7 @@ const GithubProvider = ({children}) => {
             setRequests(remaining)
             if (remaining === 0) {
                 //setError
+                toggleError(true, 'You have exceeded requests limit')
             } 
         })
         .catch((err) => console.log(err))
@@ -35,7 +36,11 @@ const GithubProvider = ({children}) => {
         checkRequests()
     }, [])
 
-    return <GithubContext.Provider value={{ githubUser, repos, followers, requests, loading, }}>{children}</GithubContext.Provider>
+    const toggleError = (show = false, msg = '') => {
+        setError({ show, msg })
+    }
+
+    return <GithubContext.Provider value={{ githubUser, repos, followers, requests, loading, error }}>{children}</GithubContext.Provider>
 }
 
 export const useGlobalContext = () => {
