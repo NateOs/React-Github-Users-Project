@@ -30,21 +30,29 @@ const GithubProvider = ({children}) => {
             //* creating new query
             const {login, followers_url} = response.data
 
-            //*for repos
-            axios(`${rootUrl}/users/${login}/repos?per_page=100`)
-            .then(response => setRepos(response.data))
-            
-            //* for followers
-            axios(`https://api.github.com/users/${login}/followers`)
-            .then(response => setFollowers(response.data))
+        //* promise.allSettled resolves both promises at the same time
+        //* will only return data after all promises have been resolved
+        await Promise.allSettled([
+                //* getting repos and followers at the same time
+                axios(`${rootUrl}/users/${login}/repos?per_page=100`), 
+                axios(`https://api.github.com/users/${login}/followers`)
+            ]).then((results) => {
+                const [repos,followers] = results
+                const status ="fulfilled"
+                if (repos.status === status) {
+                    setRepos(repos.value.data)
+                }
+                if (followers.status === status) {
+                    setFollowers(followers.value.data)
+                }
+            }).catch(err => console.log(err))
         } else {
             toggleError(true, 'there is no user with that username')
         }
         checkRequests()
         setLoading(false)
     }
-    // https://api.github.com/users/john-smilga/repos?per_page=100
-    // https://api.github.com/users/john-smilga/followers
+ 
 
     //* check request rate of 60
     const checkRequests = () => {
