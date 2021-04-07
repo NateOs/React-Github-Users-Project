@@ -33,7 +33,7 @@ const Repos = () => {
       //* replacing 'value' with stars, since that's what the table is waiting for
       return {...item, value: item.stars} 
     }).slice(0,5)
-    console.log(mostPopular)
+    // console.log(mostPopular)
 
   //* getting stars and forks
   let {stars, forks} = repos.reduce((total, item) => {

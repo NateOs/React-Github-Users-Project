@@ -3,8 +3,11 @@ import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import { useGlobalContext } from '../context/context';
 
+
 const Search = () => {
   const [user, setUser] = useState('')
+  const { requests } = useGlobalContext()
+
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(user)
@@ -19,13 +22,13 @@ const Search = () => {
           <div className='form-control'>
             <MdSearch></MdSearch>
             <input type="text" placeholder='enter github user' value={user} onChange={(e) => setUser(e.target.value)}/>
-            <button type='submit'>Search</button>
+            { requests > 0 && <button type='submit'>Search</button> }
           </div>
         </form>
+        <h3>requests: {requests} / 60</h3>
       </Wrapper>
     </section>
   )
-  
 };
 
 const Wrapper = styled.div`
