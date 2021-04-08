@@ -5,7 +5,8 @@ import loginImg from '../images/login-img.svg';
 
 
 const Login = () => {
-  const { loginWithRedirect } = useAuth0()
+  const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0()
+
   return (
   <Wrapper>
     <div className='container'>
@@ -13,7 +14,8 @@ const Login = () => {
       <h1>github user</h1>
       <button className='btn' onClick={loginWithRedirect}>login / signup</button>
     </div>
-  </Wrapper>)
+  </Wrapper>
+  )
 };
 const Wrapper = styled.section`
   min-height: 100vh;
