@@ -1,13 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAuth0 } from '@auth0/auth0-react';
+import User from './User';
 
 const Navbar = () => {
-  const { isAuthenticated, loginWithRedirect, logour, user, isLoading } = useAuth0()
-
+  const { isAuthenticated, loginWithRedirect, logout, user, isLoading } = useAuth0()
+console.log(isAuthenticated, user, isLoading);
+  const isUser = isAuthenticated && user
+ 
   return (
     <Wrapper>
-      <button onClick={loginWithRedirect}>login</button>
+      {isAuthenticated && user && !isLoading && <img src={user.picture} alt={user.name}/>}
+      {isUser && <p>Welcome, {user.name}</p>}
+      {isUser ? 
+        <button onClick={()=>{logout({
+          returnTo:window.location.origin}
+          )}}>logout</button>
+          : <button onClick={loginWithRedirect}>login</button>}
     </Wrapper>
     )
 };
